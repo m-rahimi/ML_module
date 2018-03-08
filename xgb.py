@@ -10,7 +10,7 @@ class XGBoostReg(object):
         self.clf = None
         self.num_boost_round = num_boost_round
         self.params = kwargs
-        self.params.update({'objective': 'reg:linear'})
+        self.params.update({'objective': 'reg:linear', 'silent' : True})
 
     def fit(self, X, y, num_boost_round=None):
         num_boost_round = num_boost_round or self.num_boost_round
@@ -71,7 +71,7 @@ class XGBoostOpt(object):
         self.grid_list = []
         self.num_boost_round = num_boost_round
         self.params = kwargs
-        self.params.update({'objective': 'reg:linear'})
+        self.params.update({'objective': 'reg:linear', 'silent' : True})
 
     def grid(self, keys, comb, it=0):
         if len(keys) == it:
