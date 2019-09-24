@@ -6,7 +6,7 @@ def reduce_memory_usage(df, deep=True, verbose=True, categories=True):
     numeric2reduce = ["int16", "int32", "int64", "float64"]
     start_mem = 0
     if verbose:
-        start_mem = memory_usage_mb(df, deep=deep)
+        start_mem = df.memory_usage().sum() / 1024**2
 
     for col, col_type in df.dtypes.iteritems():
         best_type = None
@@ -22,7 +22,7 @@ def reduce_memory_usage(df, deep=True, verbose=True, categories=True):
             print(f"Column '{col}' converted from {col_type} to {best_type}")
 
     if verbose:
-        end_mem = memory_usage_mb(df, deep=deep)
+        end_mem = df.memory_usage().sum() / 1024**2
         diff_mem = start_mem - end_mem
         percent_mem = 100 * diff_mem / start_mem
         print(f"Memory usage decreased from"
